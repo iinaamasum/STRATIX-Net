@@ -27,6 +27,7 @@ Both models are designed for 8-class endoscopic image classification.
 | Model                 | Precision (%) | Recall (%)   | F1-score (%) | Accuracy (%) | Model Size (MB) | Inference Time (ms) |
 | --------------------- | ------------- | ------------ | ------------ | ------------ | --------------- | ------------------- |
 | MobileGastroVisionNet | 93.89 ± 1.23  | 93.84 ± 1.23 | 93.87 ± 1.23 | 93.84 ± 1.23 | 30.67           | 0.27                |
+| GastroVisionNet       | 94.23 ± 1.14  | 94.19 ± 1.15 | 94.21 ± 1.14 | 94.19 ± 1.15 | 110.14          | 0.32                |
 
 ## Project Structure
 
