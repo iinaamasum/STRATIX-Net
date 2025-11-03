@@ -128,16 +128,6 @@ kvasir-v2-5folds/
     └── ...
 ```
 
-The model supports 8 classification classes:
-
--   normal-cecum
--   dyed-lifted-polyps
--   dyed-resection-margins
--   esophagitis
--   normal-pylorus
--   polyps
--   ulcerative-colitis
--   normal-z-line
 
 ## Usage
 
