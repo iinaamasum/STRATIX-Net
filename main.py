@@ -1,6 +1,6 @@
 """
-GastroVisionNet - Main Training and Evaluation Script
-Support for both GastroVisionNet and MobileGastroVisionNet models
+STRATIX-Net - Main Training and Evaluation Script
+Support for both STRATIX-Net and MobileSTRATIX-Net models
 """
 
 import os
@@ -48,14 +48,14 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def main():
     parser = argparse.ArgumentParser(
-        description="GastroVisionNet Training and Evaluation"
+        description="STRATIX-Net Training and Evaluation"
     )
     parser.add_argument(
         "--model",
         type=str,
-        default="gastrovisionnet",
-        choices=["gastrovisionnet", "mobilegastrovisionnet"],
-        help="Model to train (default: gastrovisionnet)",
+        default="stratixnet",
+        choices=["stratixnet", "mobilestratixnet"],
+        help="Model to train (default: stratixnet)",
     )
     parser.add_argument(
         "--base_path",

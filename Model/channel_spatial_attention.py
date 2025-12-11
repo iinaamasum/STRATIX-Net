@@ -1,5 +1,5 @@
 """
-Channel and Spatial Attention mechanisms for GastroVisionNet
+Channel and Spatial Attention mechanisms for STRATIX-Net
 """
 
 import torch

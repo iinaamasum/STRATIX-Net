@@ -1,5 +1,5 @@
 """
-GastroVisionNet - Advanced Endoscopic Image Classification
+STRATIX-Net - Advanced Endoscopic Image Classification
 Copyright (c) 2025 Qatar University
 """
 

@@ -1,5 +1,5 @@
 """
-Optimizer and scheduler configurations for GastroVisionNet
+Optimizer and scheduler configurations for STRATIX-Net
 """
 
 import torch.optim as optim

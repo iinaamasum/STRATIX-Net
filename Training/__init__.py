@@ -1,4 +1,4 @@
-"""Training utilities for GastroVisionNet"""
+"""Training utilities for STRATIX-Net"""
 
 from .train_val import train_and_evaluate
 from .optimizer_scheduler import get_optimizer_scheduler

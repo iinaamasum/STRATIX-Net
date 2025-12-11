@@ -1,5 +1,5 @@
 """
-Dataset loading utilities for GastroVisionNet
+Dataset loading utilities for STRATIX-Net
 """
 
 import os

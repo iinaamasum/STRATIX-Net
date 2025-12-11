@@ -1,5 +1,5 @@
 """
-Triad Attention mechanism for GastroVisionNet
+MDA (Multi-Dimensional Attention) mechanism for STRATIX-Net
 """
 
 import torch
@@ -74,9 +74,9 @@ class AttentionGate(nn.Module):
         return x * scale
 
 
-class TriadAttention(nn.Module):
+class MDA(nn.Module):
     def __init__(self, no_spatial=False):
-        super(TriadAttention, self).__init__()
+        super(MDA, self).__init__()
         self.channel_wise = AttentionGate()
         self.height_wise = AttentionGate()
         self.no_spatial = no_spatial
@@ -84,7 +84,7 @@ class TriadAttention(nn.Module):
             self.spatial_wise = AttentionGate()
 
     def forward(self, x):
-        logger.debug(f"TriadAttention input shape: {x.shape}")
+        logger.debug(f"MDA input shape: {x.shape}")
         x_perm1 = x.permute(0, 2, 1, 3).contiguous()
         x_out1 = self.channel_wise(x_perm1)
         x_out11 = x_out1.permute(0, 2, 1, 3).contiguous()
@@ -96,5 +96,6 @@ class TriadAttention(nn.Module):
             x_out = (1 / 3) * (x_out + x_out11 + x_out21)
         else:
             x_out = (1 / 2) * (x_out11 + x_out21)
-        logger.debug(f"TriadAttention output shape: {x_out.shape}")
+        logger.debug(f"MDA output shape: {x_out.shape}")
         return x_out
+

@@ -1,4 +1,4 @@
-"""Evaluation utilities for GastroVisionNet"""
+"""Evaluation utilities for STRATIX-Net"""
 
 from .evaluation import test_model, plot_metrics, count_parameters
 

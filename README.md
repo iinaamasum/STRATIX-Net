@@ -1,21 +1,21 @@
-# GastroVisionNet - Advanced Endoscopic Image Classification
+# STRATIX-Net - Advanced Endoscopic Image Classification
 
 Copyright (c) 2025 Qatar University
 
-GastroVisionNet is a state-of-the-art deep learning framework for endoscopic image classification with two model variants: GastroVisionNet (full model) and MobileGastroVisionNet (lightweight mobile model).
+STRATIX-Net is a state-of-the-art deep learning framework for endoscopic image classification with two model variants: STRATIX-Net (full model) and MobileSTRATIX-Net (lightweight mobile model).
 
 ## Architecture
 
 The framework consists of two main model variants:
 
-1. **GastroVisionNet**: MobileNetV2 backbone with TriadAttention mechanisms, ConvNeXt blocks, and enhanced CBAM attention
-2. **MobileGastroVisionNet**: Lightweight MobileNetV2 with MSCA (Mobile Spatial Channel Attention)
+1. **STRATIX-Net**: Custom lightweight architecture with Inverted Residual Blocks, MDA (Multi-Dimensional Attention) mechanisms, ConvNeXt blocks, and enhanced CBAM attention
+2. **MobileSTRATIX-Net**: Lightweight MobileNetV2 (implemented from scratch) with MSCA (Mobile Spatial Channel Attention)
 
 Both models are designed for 8-class endoscopic image classification.
 
 ## Key Features
 
--   **Multi-attention mechanisms**: TriadAttention, MSCA, CBAM, and Self-Attention
+-   **Multi-attention mechanisms**: MDA (Multi-Dimensional Attention), MSCA, CBAM, and Self-Attention
 -   **Advanced preprocessing**: Image normalization and augmentation
 -   **Comprehensive evaluation**: Accuracy, Precision, Recall, F1-score, MCC, Kappa, and ROC-AUC with confidence intervals
 -   **Cross-validation support**: Built-in 5-fold cross-validation
@@ -24,15 +24,15 @@ Both models are designed for 8-class endoscopic image classification.
 
 ## Model Performance
 
-| Model                 | Precision (%) | Recall (%)   | F1-score (%) | Accuracy (%) | Model Size (MB) | Inference Time (ms) |
-| --------------------- | ------------- | ------------ | ------------ | ------------ | --------------- | ------------------- |
-| MobileGastroVisionNet | 93.89 ± 1.23  | 93.84 ± 1.23 | 93.87 ± 1.23 | 93.84 ± 1.23 | 30.67           | 0.27                |
-| GastroVisionNet       | 94.23 ± 1.14  | 94.19 ± 1.15 | 94.21 ± 1.14 | 94.19 ± 1.15 | 110.14          | 0.32                |
+| Model             | Precision (%) | Recall (%)   | F1-score (%) | Accuracy (%) | Model Size (MB) | Inference Time (ms) |
+| ----------------- | ------------- | ------------ | ------------ | ------------ | --------------- | ------------------- |
+| MobileSTRATIX-Net | 93.89 ± 1.23  | 93.84 ± 1.23 | 93.87 ± 1.23 | 93.84 ± 1.23 | 30.67           | 0.27                |
+| STRATIX-Net       | 94.23 ± 1.14  | 94.19 ± 1.15 | 94.21 ± 1.14 | 94.19 ± 1.15 | 110.14          | 0.32                |
 
 ## Project Structure
 
 ```
-GastroVisionNet/
+STRATIX-Net/
 ├── Load_Dataset/
 │   ├── __init__.py
 │   └── dataset.py               # Dataset loading and preprocessing
@@ -42,9 +42,9 @@ GastroVisionNet/
 ├── Model/
 │   ├── __init__.py
 │   ├── config.py                # Model configuration
-│   ├── gastrovisionnet.py       # Full GastroVisionNet model
-│   ├── mobilegastrovisionnet.py # MobileGastroVisionNet model
-│   ├── triad_attention.py       # TriadAttention mechanism
+│   ├── stratixnet.py            # Full STRATIX-Net model
+│   ├── mobilestratixnet.py      # MobileSTRATIX-Net model
+│   ├── mda.py                   # MDA (Multi-Dimensional Attention) mechanism
 │   ├── convnext_block.py        # ConvNeXt blocks
 │   ├── channel_spatial_attention.py # CBAM attention
 │   └── model.py                 # Model factory
@@ -82,7 +82,7 @@ GastroVisionNet/
 1. Clone the repository:
 
 ```bash
-cd GastroVisionNet
+cd STRATIX-Net
 ```
 
 2. Install dependencies:
@@ -128,7 +128,6 @@ kvasir-v2-5folds/
     └── ...
 ```
 
-
 ## Usage
 
 ### Training
@@ -137,7 +136,7 @@ Run the main training script with your desired model:
 
 ```bash
 python main.py \
-    --model gastrovisionnet \
+    --model stratixnet \
     --base_path /path/to/kvasir-v2-5folds \
     --batch_size 16 \
     --num_epochs 100 \
@@ -151,7 +150,7 @@ For the mobile model:
 
 ```bash
 python main.py \
-    --model mobilegastrovisionnet \
+    --model mobilestratixnet \
     --base_path /path/to/kvasir-v2-5folds \
     --batch_size 16 \
     --num_epochs 100 \
@@ -163,7 +162,7 @@ python main.py \
 
 ### Key Parameters
 
--   `--model`: Model architecture to use (`gastrovisionnet` or `mobilegastrovisionnet`)
+-   `--model`: Model architecture to use (`stratixnet` or `mobilestratixnet`)
 -   `--base_path`: Path to the kvasir-v2-5folds directory
 -   `--batch_size`: Batch size for training (default: 16)
 -   `--num_epochs`: Number of training epochs (default: 100)
@@ -205,22 +204,29 @@ kvasir_v2_classification_results_{model_name}.csv
 
 ## Model Architecture Details
 
-### GastroVisionNet
+### STRATIX-Net
 
--   **Backbone**: MobileNetV2 (ImageNet pretrained)
--   **Attention**: TriadAttention at multiple stages
+-   **Backbone**: Custom lightweight architecture with Inverted Residual Blocks (IRB) implemented from scratch
+-   **Attention**: MDA (Multi-Dimensional Attention) at multiple stages
 -   **Enhancements**: ConvNeXt blocks, Channel Attention, Spatial Attention
 -   **Classifier**: Fully connected layer with dropout (0.2)
+-   **Architecture Stages**:
+    -   Stage 1: First 6 IRB blocks
+    -   Stage 2: MDA + 4 IRB blocks
+    -   Stage 3: MDA + 2 IRB blocks
+    -   Stage 4: 1 IRB + MDA
+    -   Stage 5: 4 IRB blocks
+    -   Stage 6: Remaining IRB blocks + final conv + enhanced processing
 
-### MobileGastroVisionNet
+### MobileSTRATIX-Net
 
--   **Backbone**: MobileNetV2 (ImageNet pretrained)
+-   **Backbone**: MobileNetV2 implemented from scratch (no pretrained weights)
 -   **Attention**: MSCA (Mobile Spatial Channel Attention)
 -   **Classifier**: Fully connected layers with dropout (0.4)
 
 ### Attention Mechanisms
 
--   **TriadAttention**: Three-way attention (channel, height, spatial)
+-   **MDA (Multi-Dimensional Attention)**: Three-way attention (channel, height, spatial)
 -   **MSCA**: Lightweight channel attention with global average and max pooling
 -   **CBAM**: Convolutional Block Attention Module (channel + spatial)
 -   **ConvNeXt Blocks**: Modern architectural patterns with layer scaling

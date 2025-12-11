@@ -1,5 +1,5 @@
 """
-Preprocessing utilities for GastroVisionNet
+Preprocessing utilities for STRATIX-Net
 """
 
 from torchvision import transforms

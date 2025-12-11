@@ -1,5 +1,5 @@
 """
-ConvNeXt Block components for GastroVisionNet
+ConvNeXt Block components for STRATIX-Net
 """
 
 import torch

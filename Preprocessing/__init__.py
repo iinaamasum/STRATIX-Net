@@ -1,4 +1,4 @@
-"""Preprocessing utilities for GastroVisionNet"""
+"""Preprocessing utilities for STRATIX-Net"""
 
 from .preprocessing import get_transforms
 

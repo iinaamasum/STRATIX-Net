@@ -1,5 +1,6 @@
 """
-MobileGastroVisionNet Model - Lightweight MobileNetV2 with MSCA attention
+MobileSTRATIX-Net Model - Lightweight MobileNetV2 with MSCA attention
+Uses pretrained MobileNetV2 from torchvision
 """
 
 import torch.nn as nn
@@ -46,11 +47,11 @@ class MSCA(nn.Module):
         return x * attention, attention
 
 
-class MobileGastroVisionNet(nn.Module):
+class MobileSTRATIXNet(nn.Module):
     def __init__(self, num_classes=8):
-        super(MobileGastroVisionNet, self).__init__()
+        super(MobileSTRATIXNet, self).__init__()
 
-        # Load pre-trained MobileNetV2 and extract features
+        # Load pretrained MobileNetV2 and extract features
         self.mobilenet_v2 = mobilenet_v2(weights=MobileNet_V2_Weights.IMAGENET1K_V1)
         self.mobilenet_v2.features = nn.Sequential(*self.mobilenet_v2.features)
 

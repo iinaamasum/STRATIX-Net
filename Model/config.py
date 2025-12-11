@@ -1,5 +1,5 @@
 """
-Configuration and constants for GastroVisionNet models
+Configuration and constants for STRATIX-Net models
 """
 
 import logging

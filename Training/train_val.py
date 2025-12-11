@@ -1,5 +1,5 @@
 """
-Training and validation functions for GastroVisionNet
+Training and validation functions for STRATIX-Net
 """
 
 import os
